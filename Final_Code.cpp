@@ -177,22 +177,16 @@ int main() {
     cin >> l >> r;
 
     start = high_resolution_clock::now();
-    int sum_lazy = seg.query_sum(l, r);
-    stop = high_resolution_clock::now();
-    auto duration_query_sum_lazy = duration_cast<nanoseconds>(stop - start);
-    cout << "Range sum query time with lazy propagation: " << duration_query_sum_lazy.count() << " nanoseconds" << endl;
-
-    start = high_resolution_clock::now();
     int sum_no_lazy = seg.query_sum(l, r);
     stop = high_resolution_clock::now();
     auto duration_query_sum_no_lazy = duration_cast<nanoseconds>(stop - start);
     cout << "Range sum query time without lazy propagation: " << duration_query_sum_no_lazy.count() << " nanoseconds" << endl;
 
     start = high_resolution_clock::now();
-    int min_lazy = seg.query_min(l, r);
+    int sum_lazy = seg.query_sum(l, r);
     stop = high_resolution_clock::now();
-    auto duration_query_min_lazy = duration_cast<nanoseconds>(stop - start);
-    cout << "Range minimum query time with lazy propagation: " << duration_query_min_lazy.count() << " nanoseconds" << endl;
+    auto duration_query_sum_lazy = duration_cast<nanoseconds>(stop - start);
+    cout << "Range sum query time with lazy propagation: " << duration_query_sum_lazy.count() << " nanoseconds" << endl;
 
     start = high_resolution_clock::now();
     int min_no_lazy = seg.query_min(l, r);
@@ -201,10 +195,10 @@ int main() {
     cout << "Range minimum query time without lazy propagation: " << duration_query_min_no_lazy.count() << " nanoseconds" << endl;
 
     start = high_resolution_clock::now();
-    int max_lazy = seg.query_max(l, r);
+    int min_lazy = seg.query_min(l, r);
     stop = high_resolution_clock::now();
-    auto duration_query_max_lazy = duration_cast<nanoseconds>(stop - start);
-    cout << "Range maximum query time with lazy propagation: " << duration_query_max_lazy.count() << " nanoseconds" << endl;
+    auto duration_query_min_lazy = duration_cast<nanoseconds>(stop - start);
+    cout << "Range minimum query time with lazy propagation: " << duration_query_min_lazy.count() << " nanoseconds" << endl;
 
     start = high_resolution_clock::now();
     int max_no_lazy = seg.query_max(l, r);
@@ -212,27 +206,33 @@ int main() {
     auto duration_query_max_no_lazy = duration_cast<nanoseconds>(stop - start);
     cout << "Range maximum query time without lazy propagation: " << duration_query_max_no_lazy.count() << " nanoseconds" << endl;
 
+    start = high_resolution_clock::now();
+    int max_lazy = seg.query_max(l, r);
+    stop = high_resolution_clock::now();
+    auto duration_query_max_lazy = duration_cast<nanoseconds>(stop - start);
+    cout << "Range maximum query time with lazy propagation: " << duration_query_max_lazy.count() << " nanoseconds" << endl;
+
     int val;
     cout << "Enter the value for update: ";
     cin >> val;
     start = high_resolution_clock::now();
     seg.update(l, r, val);
     stop = high_resolution_clock::now();
-    auto duration_update_lazy = duration_cast<nanoseconds>(stop - start);
-    cout << "Range update time with lazy propagation: " << duration_update_lazy.count() << " nanoseconds" << endl;
+    auto duration_update_no_lazy = duration_cast<nanoseconds>(stop - start);
+    cout << "Range update time without lazy propagation: " << duration_update_no_lazy.count() << " nanoseconds" << endl;
 
     start = high_resolution_clock::now();
     seg.update(l, r, val);
     stop = high_resolution_clock::now();
-    auto duration_update_no_lazy = duration_cast<nanoseconds>(stop - start);
-    cout << "Range update time without lazy propagation: " << duration_update_no_lazy.count() << " nanoseconds" << endl;
+    auto duration_update_lazy = duration_cast<nanoseconds>(stop - start);
+    cout << "Range update time with lazy propagation: " << duration_update_lazy.count() << " nanoseconds" << endl;
 
-    cout << "Range sum with lazy propagation: " << sum_lazy << endl;
     cout << "Range sum without lazy propagation: " << sum_no_lazy << endl;
-    cout << "Range minimum with lazy propagation: " << min_lazy << endl;
+    cout << "Range sum with lazy propagation: " << sum_lazy << endl;
     cout << "Range minimum without lazy propagation: " << min_no_lazy << endl;
-    cout << "Range maximum with lazy propagation: " << max_lazy << endl;
+    cout << "Range minimum with lazy propagation: " << min_lazy << endl;
     cout << "Range maximum without lazy propagation: " << max_no_lazy << endl;
+    cout << "Range maximum with lazy propagation: " << max_lazy << endl;
 
     return 0;
 }
